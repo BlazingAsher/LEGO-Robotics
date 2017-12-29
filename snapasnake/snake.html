@@ -1,0 +1,353 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<!--
+MIT License for all modifications made to this file
+
+Copyright (c) 2017 David Hui
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Snap A Snake</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link href="robotofont.css" rel="stylesheet">
+    <link href="offlineicons.css" rel="stylesheet">
+	<link rel="stylesheet" href="snake.css">
+    <link rel="stylesheet" href="material.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Home</span>
+          <div class="mdl-layout-spacer"></div>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            <li class="mdl-menu__item">About</li>
+            <li class="mdl-menu__item">Contact</li>
+            <li class="mdl-menu__item">Legal information</li>
+          </ul>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <img src="images/user.jpg" class="demo-avatar">
+		  <br>
+          <div class="demo-avatar-dropdown">
+            <span><b>Snap A Snake</b></span>
+            <div class="mdl-layout-spacer"></div>
+           
+          
+          </div>
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href="."><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href="snake.html"><i class="mdl-color-text--blue-grey-400 material-icons icon-snake" role="presentation"></i>Snakes</a>
+          <a class="mdl-navigation__link" href="phone.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">phone</i>Phone Numbers</a>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" href="help.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+	  <div class="mdl-grid">
+	  <div class="mdl-cell mdl-cell--4-col">
+	  <div id="blueracer">
+	  <!-- Square card -->
+<style>
+.blueracer-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.blueracer-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/blueracer.jpg') center left 50% no-repeat #46B6AC;
+}
+</style>
+
+<div class="blueracer-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Blue Racer</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="blueracer.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  </div>
+		  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="butlergarter">
+	  <!-- Square card -->
+<style>
+.butlergarter-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.butlergarter-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/butlergarter_smaller.jpg') bottom left 0% no-repeat #46B6AC;
+}
+</style>
+
+<div class="butlergarter-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Eastern Garter Snake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="demo.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+	  </div>
+	  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="easternhognose">
+	  <!-- Square card -->
+<style>
+.easternhognose-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.easternhognose-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/hognose.jpg') center left 10% no-repeat #46B6AC;
+}
+</style>
+
+<div class="easternhognose-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Eastern Hognose Snake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="hognose.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+		  </div>
+ 	  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="rattle">
+	  <!-- Square card -->
+<style>
+.rattle-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.rattle-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/rattle.jpg') top left 10% no-repeat #46B6AC;
+}
+</style>
+
+<div class="rattle-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Eastern Massasagua Rattlesnake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="eastmass.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+	  </div>
+	  	  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="eriewater">
+	  <!-- Square card -->
+<style>
+.eriewater-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.eriewater-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/lakeerie.jpg') center right 40% no-repeat #46B6AC;
+}
+</style>
+
+<div class="eriewater-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Erie Water Snake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="eriewater.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+	  </div>
+  	  	  	  	  	  	  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="smoothgreen">
+	  <!-- Square card -->
+<style>
+.smoothgreen-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.smoothgreen-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/green_smaller.jpg') center left 30% no-repeat #46B6AC;
+}
+</style>
+
+<div class="smoothgreen-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Smooth Green Snake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="smoothgreen.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+	  </div>
+	  	  	  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="queensnake">
+	  <!-- Square card -->
+<style>
+.queensnake-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.queensnake-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/queensnake.jpg') bottom left 40% no-repeat #46B6AC;
+}
+</style>
+
+<div class="queensnake-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Queensnake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="queensnake.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+	  </div>
+	  	  	  	  <div class="mdl-cell mdl-cell--4-col">
+		  <div id="redbellied">
+	  <!-- Square card -->
+<style>
+.redbellied-card-square.mdl-card {
+  width: 320px;
+  height: 250px;
+}
+.redbellied-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('images/snakes/redbellied.jpg') bottom right 0% no-repeat #46B6AC;
+}
+</style>
+
+<div class="redbellied-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Red-bellied Water Snake</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="redbellied.html">
+      More Info
+    </a>
+  </div>
+</div>
+		  </div>
+		  
+	  </div>
+		  
+		  </div>
+      </main>
+    </div>
+    <script src="material.min.js"></script>
+  </body>
+</html>

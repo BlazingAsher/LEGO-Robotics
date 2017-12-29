@@ -1,0 +1,3 @@
+For security reasons, I have taken out the credentials for Clarifai. You can sign up for a free account and replace the values in submitsnake.php for the app to work.
+In addition, if you do not want the app to rely on the Snap A Snake server and instead want it to rely on your own, you must replace the URL on line 74 to the absolute URL of the place where you uploaded the app of resultdirector.php, along with ?result=.
+If you have added your own url to the step above, you must open resultdirector.php and change each destination to the absolute URL of each page in the app.
